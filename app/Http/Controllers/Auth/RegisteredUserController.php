@@ -45,23 +45,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'name' => 'required|string|max:60',
             'lastname' => 'required|string|max:60',
-            'phoneNumber' => 'required|integer|min:100000|max:89999999999',
-            'companyName' => 'required|string|max:80',
+            'phone' => 'required|integer|min:100000|max:89999999999'
         ]);
 
         $user = new User();
         $user->email = $request->email;
-        $user->role = 'employer';
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $employer = new EmployerData();
-        $employer->employer_id = $user->id;
-        $employer->name = $request->name;
-        $employer->lastname = $request->lastname;
-        $employer->phone_number = $request->phoneNumber;
-        $employer->company_name = $request->companyName;
-        $employer->save();
 
 
         event(new Registered($user));
@@ -70,7 +64,6 @@ class RegisteredUserController extends Controller
 
         return redirect('/');
     }
-
     public function storeUser(Request $request)
     {
         $request->validate([

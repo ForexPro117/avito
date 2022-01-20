@@ -18,34 +18,50 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0">
-                <input type="image" class="logo_img" onclick="location.href='/'" src="{{asset("storage/logo-avito.png")}}">
+                <input type="image" class="logo_img" onclick="location.href='/'"
+                       src="{{asset("storage/logo-avito.png")}}">
                 @if(!Auth::check())
 
                 @endauth
             </ul>
             <div class="text-end nav">
                 @if(Auth::check())
-                    <label class="nav-link px-2 link-light">{{request()->user()->email}}</label>
-                    <button type="button" class="btn btn-outline-primary me-2"
+                    <a href="/aa" class="nav-link  link-light">Мои объявления</a>
+
+                    <label class="nav-link  link-light"> {{request()->user()->name}} </label>
+
+                    <button type="button" class=" text-white btn btn-primary mx-2"
+
+                            onclick="location.href='{{route('login')}}'">Разместить объявление
+                    </button>
+                    <button type="button" class="btn btn-outline-primary "
                             onclick="location.href='{{route('logout')}}'">
                         Выйти
                     </button>
                 @else
-                    <li><a href="/registration" class="nav-link px-2 link-light">Вход и регистрация</a></li>
-                    <div>
-                        <button type="button" class=" text-white btn btn btn-primary mx-2"
-                                onclick="location.href='{{route('login')}}'">Разместить объявление
-                        </button>
-                    </div>
-
+                    <li><label data-bs-toggle="modal" data-bs-target="#ModalLogin"
+                               class="nav-link mr-2 link-light nav-pointer">Вход и регистрация</label></li>
+                    <button type="button" class=" text-white btn btn-primary "
+                            onclick="location.href='{{route('login')}}'">Разместить объявление
+                    </button>
                 @endauth
+
             </div>
         </div>
     </div>
 </header>
 <main>
-    @yield("bodyContent")
 
+@yield("bodyContent")
+<!-- Modal -->
+    @if(!Auth::check())
+
+        @include('modalLogin')
+
+        @include('modalReg')
+
+    @endauth
+    <script src="{{asset("js/script.js")}}"></script>
 </main>
 {{--<footer
     class="d-flex flex-wrap justify-content-around py-3 my-4 border-top @if($_SERVER["REQUEST_URI"]!="/bdView")fixed-bottom @endif">
