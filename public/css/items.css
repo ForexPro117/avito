@@ -1,6 +1,6 @@
 .card {
     width: 236px;
-    height: 289px;
+    height: 189px;
     padding: 10px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -16,6 +16,11 @@
     font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: bold;
+    max-width:230px ;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
 }
 .text:hover {
     color: #ff6163;

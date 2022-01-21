@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\ResponseController;
-use App\Http\Controllers\WorkController;
+use App\Http\Controllers\AnnController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -17,10 +16,17 @@ use Illuminate\Http\Request;
 */
 
 
-Route::view('/', 'home')
+Route::get('/', [AnnController::class, 'home'])
     ->name('home');
 
+Route::get('/announcement',[AnnController::class, 'create'])
+    ->name('ann');
+Route::Post('/announcement',[AnnController::class, 'store'])
+->name('ann');
+Route::get('/announcement/{id}',[AnnController::class, 'watch']);
+Route::Post('/search',[AnnController::class, 'search']);
 
+Route::get('/a',[AnnController::class, 'move']);
 /*Route::get('/workUserHistory', [ResponseController::class, 'checkUserHistory'])
     ->middleware('auth', 'can:user-history');
 

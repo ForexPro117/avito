@@ -26,13 +26,13 @@
             </ul>
             <div class="text-end nav">
                 @if(Auth::check())
-                    <a href="/aa" class="nav-link  link-light">Мои объявления</a>
+                    {{--<a href="/aa" class="nav-link  link-light">Мои объявления</a>--}}
 
                     <label class="nav-link  link-light"> {{request()->user()->name}} </label>
 
                     <button type="button" class=" text-white btn btn-primary mx-2"
 
-                            onclick="location.href='{{route('login')}}'">Разместить объявление
+                            onclick="location.href='{{route('ann')}}'">Разместить объявление
                     </button>
                     <button type="button" class="btn btn-outline-primary "
                             onclick="location.href='{{route('logout')}}'">
@@ -41,9 +41,9 @@
                 @else
                     <li><label data-bs-toggle="modal" data-bs-target="#ModalLogin"
                                class="nav-link mr-2 link-light nav-pointer">Вход и регистрация</label></li>
-                    <button type="button" class=" text-white btn btn-primary "
-                            onclick="location.href='{{route('login')}}'">Разместить объявление
-                    </button>
+                    {{--<button type="button" class=" text-white btn btn-primary "
+                            onclick="location.href='{{route('ann')}}'">Разместить объявление
+                    </button>--}}
                 @endauth
 
             </div>
@@ -63,17 +63,6 @@
     @endauth
     <script src="{{asset("js/script.js")}}"></script>
 </main>
-{{--<footer
-    class="d-flex flex-wrap justify-content-around py-3 my-4 border-top @if($_SERVER["REQUEST_URI"]!="/bdView")fixed-bottom @endif">
-    <div>
-        <span class="text-muted">© 2022 Company, Inc</span>
-    </div>
-    <div>
-        <span class="text-muted"></span>
-    </div>
-    <div>
-        <a class="text-muted text-decoration-none" href="https://www.google.ru/">email@example.com</a>
-    </div>
-</footer>--}}
+
 </body>
 </html>
