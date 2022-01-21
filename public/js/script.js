@@ -19,22 +19,18 @@ window.onload = function () {
         }
     });
 }
-/*function deleteResponse(id,name)
+function deleteAnn(id)
 {
-    let confirm1 = confirm(`Вы действительно хотите удалить отклик соискателя: "${name}"?`);
-    if (confirm1)
+  /*  let confirm1 = confirm(`Вы действительно хотите удалить отклик соискателя: "${name}"?`);*/
         $.ajax({
-            url: "/deleteResponse",
+            url: "/delete",
             type: "POST",
-            data: ({_token: $('#csrf-token')[0].content, 'responseId': id}),
+            data: ({_token: $('#csrf-token')[0].content, 'id': id}),
             dataType: "text",
             success:(data)=>{
-                $(`#${id}`).remove();
+                $(`#card${id}`).remove();
             }
 
         });
-}*/
-var request = new XMLHttpRequest();
-request.onload = function() {
-    console.log('sss')
-};
+}
+

@@ -34,7 +34,7 @@ class AnnController extends Controller
         foreach ($request->images as $image) {
             $photo = new Photo();
             $photo->announcement_id = $ann->id;
-            $photo->file = mb_strcut(Storage::put('public', $image), 7);
+            $photo->file = Storage::disk('public_uploads')->put('/', $image);
             $photo->file_original_name = $image->getClientOriginalName();
             $photo->save();
         }
@@ -84,8 +84,25 @@ class AnnController extends Controller
 
     }
 
-    public function move()
+    public function getHistory(Request $request)
     {
-       return Storage::disk('public_uploads')->put( 'zz','text.txt');
+        $ann = Announcement::where('user_id', $request->user()->id)->get();
+        foreach ($ann as $an) {
+            $photos = Photo::where('announcement_id', $an->id)->get();
+            $an->countPhotos = count($photos);
+            for ($i = 0; $i < count($photos); $i++) {
+                $an['photo' . $i] = $photos[$i]->file;
+            }
+
+        }
+       return view('historyAnn', ['ann' => $ann]);
     }
+    public function delete(Request $request)
+    {
+        $ann = Announcement::find($request->id);
+        /*Storage::delete($response->file);*/
+        $ann->delete();
+        return 'good';
+    }
+
 }

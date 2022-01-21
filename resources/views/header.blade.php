@@ -26,7 +26,7 @@
             </ul>
             <div class="text-end nav">
                 @if(Auth::check())
-                    {{--<a href="/aa" class="nav-link  link-light">Мои объявления</a>--}}
+                    <a href="/history" class="nav-link  link-light">Мои объявления</a>
 
                     <label class="nav-link  link-light"> {{request()->user()->name}} </label>
 
